@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/test', function () {
     return view('welcome');
-});
+})->name('testaaa');
+
+Route::get('/{link}', 'ExperimentController@show');
+Route::post('/', 'ExperimentController@save')->name('saveExperimentData');
