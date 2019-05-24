@@ -1,0 +1,32 @@
+body {
+    background-color: #ddd;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.container {
+    width: 600px;
+    min-height: 450px;
+    background: #ddd;
+    border: 1px solid red;
+}
+
+.sample {
+    width: 500px;
+    min-height: 350px;
+    display: block;
+}
+.sample--white {
+    background: #fff;
+}
+.sample--black {
+    background: #000;
+}
+
+.visually-hidden {
+    display: none;
+}

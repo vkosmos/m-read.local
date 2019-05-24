@@ -10,34 +10,21 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         {{-- Style --}}
-        <style>
-            body {
-                background-color: #ddd;
-            }
-
-            main {
-                display: flex;
-                flex-direction: column;
-
-            }
-
-            .sample {
-                width: 600px;
-                min-height: 450px;
-                background: #ddd;
-                border: 1px solid red;
-            }
-
-        </style>
+        <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     </head>
 
     <body>
 
+        <div class="random visually-hidden" data-random="{{$random}}"></div>
+
         <main>
+
             <h1>Считывание информации</h1>
 
-            <div class="sample">
+            <div class="container">
+
+                <div class="sample visually-hidden"></div>
 
             </div>
 
@@ -47,16 +34,22 @@
 
             <form method="POST" action="{{route('saveExperimentData')}}">
                 @csrf
-                <label><input type="radio" name="color" value="white">Белый<label><br>
-                <label><input type="radio" name="color" value="black">Черный<label><br>
+                <input type="hidden" name="link" value="{{$link}}">
+                <input class="input__random" type="hidden" name="random" value="{{$random}}">
+                <input class="input__success" type="hidden" name="success" value="">
 
-                <button tyle="submit">Ответить</button>
+                @for($i = 0; $i <= $max; $i++)
+                    <label><input class="input__decision" type="radio" name="value1" value="{{$values[$i]->value['value']}}">{{$values[$i]->value['title']}}<label><br>
+                @endfor
+
+                <button class="button__set" tyle="submit">Ответить</button>
             </form>
+            <p>{{$participant_name}}</p>
 
         </main>
 
-
-
+        <script type="text/javascript" src="{{asset('js/jquery-3.2.0.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
 
     </body>
 </html>
