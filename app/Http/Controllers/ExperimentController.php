@@ -19,27 +19,28 @@ class ExperimentController extends Controller
         $values = Experiment_values_con::where('experiment_id', $experiment['id'])->get();
         $random = random_int(0, count($values) - 1);
 
+        $success = null;
+
+        if (session()->exists('success')) {
+            $success = session('success');
+            $random = session('random');
+        }
+
         return view('experiment', [
             'link' => $link,
             'values' => $values,
             'max' => count($values) - 1,
             'random' => $random,
             'participant_name' => $participant['name'],
-            ]);
+            'success' => $success,
+        ]);
+
     }
 
     public function save(Request $request)
     {
         $experiment = Experiment::where('active', 1)->first();
         $participant = Participant::where('link', $request['link'])->first();
-
-        //Сохраняем данные эксперимента в БД
-        //experiment_id
-        //value_id
-        //value_random_id
-        //participant_id
-        //success
-
         $newData = new ExperimentData;
         $newData->experiment_id = $experiment['id'];
         $newData->participant_id = $participant['id'];
@@ -49,7 +50,9 @@ class ExperimentController extends Controller
 
         $newData->save();
 
-        return redirect()->route('showExperiment', ['link' => $request['link']]);
+        session()->flash('success', $request['success']);
+        session()->flash('random', $request['random']);
 
+        return redirect()->route('showExperiment', ['link' => $request['link']]);
     }
 }

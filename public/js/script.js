@@ -1,15 +1,25 @@
 $(document).ready(function(){
 
     let sample = document.querySelector('.sample');
-    let random = document.querySelector('.random').getAttribute('data-random');
+    let isSession = $('.data-handler').data('session');
+    let random = $('.data-handler').data('random');
+    let link = $('input[name="link"]').val();
 
     if (0 == random) {
         sample.classList.add('sample--white');
     } else if (1 == random) {
         sample.classList.add('sample--black');
     }
-    sample.classList.remove('visually-hidden');
 
+    //Переадресация после ответа пользователя
+    if (1 == isSession) {
+        sample.classList.remove('visually-hidden');
+
+        //Перезапрашиваем страницу для нового теста
+        setTimeout(function(){
+            window.location = '/' + link;
+        }, 3000);
+    }
 
     $('.button__set').on('click', function(ev){
 
@@ -19,13 +29,12 @@ $(document).ready(function(){
         //Проверка на undefined
         if (decision != undefined) {
 
-            let isRight = 0;
+            let success = 0;
             if (random == decision) {
-                isRight = 1;
+                success = 1;
             }
 
-            $('.input__success').val(isRight);
-
+            $('.input__success').val(success);
         } else {
             ev.preventDefault();
         }
@@ -34,3 +43,5 @@ $(document).ready(function(){
 
 
 });
+
+

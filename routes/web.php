@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/test', function () {
-    return view('welcome');
-})->name('testaaa');
+Route::get('/', function () {
+    return view('uselink');
+});
 
 Route::get('/{link}', 'ExperimentController@show')->name('showExperiment');
 Route::post('/', 'ExperimentController@save')->name('saveExperimentData');

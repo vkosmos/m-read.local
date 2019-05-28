@@ -5,20 +5,23 @@ body {
 main {
     display: flex;
     flex-direction: column;
-
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
     width: 600px;
     min-height: 450px;
     background: #ddd;
-    border: 1px solid red;
+    margin-bottom: 20px;
+    border: 1px solid #666;
 }
 
 .sample {
+    display: block;
     width: 500px;
     min-height: 350px;
-    display: block;
+    margin: 50px auto;
 }
 .sample--white {
     background: #fff;
@@ -29,4 +32,27 @@ main {
 
 .visually-hidden {
     display: none;
+}
+
+.result-form {
+    border: 1px solid #666;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.result-form input {
+    margin-bottom: 10px;
+}
+
+.result-form label {
+    font-size: 18px;
+}
+
+.result-form button {
+    margin-top: 15px;
+    width: 200px;
+}
+
+.text__red {
+    color: #f00;
 }
